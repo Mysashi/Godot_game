@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=3 uid="uid://ye80q8aobymu"]
+
+[ext_resource type="Texture2D" uid="uid://cj1pjysg603o3" path="res://radar10.png" id="2_o1xb8"]
+[ext_resource type="Script" path="res://Movement.gd" id="3_gltbm"]
+[ext_resource type="Texture2D" uid="uid://b8eltoy4tlbxf" path="res://279581d763a22598.png" id="3_jioat"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r2esl"]
+size = Vector2(46.5, 42)
+
+[node name="Player" type="Node2D"]
+position = Vector2(-216, 214)
+
+[node name="player" type="CharacterBody2D" parent="."]
+collision_layer = 2
+collision_mask = 3
+script = ExtResource("3_gltbm")
+
+[node name="Camera2D" type="Camera2D" parent="player"]
+position = Vector2(-2.37402, -3.01707)
+scale = Vector2(0.21582, 0.224121)
+
+[node name="Sprite2D" type="Sprite2D" parent="player"]
+position = Vector2(17.75, -16)
+scale = Vector2(1.45312, 1.3125)
+texture = ExtResource("3_jioat")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="player"]
+position = Vector2(17.75, -16)
+shape = SubResource("RectangleShape2D_r2esl")
+
+[node name="TextureRect" type="TextureRect" parent="player"]
+texture_filter = 1
+offset_left = -1134.0
+offset_top = -651.0
+offset_right = 3323.0
+offset_bottom = 1974.0
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_o1xb8")
