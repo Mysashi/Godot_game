@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://bqvv0qd6s7wbr"]
+
+[node name="GAME" type="Control"]
+layout_mode = 3
+anchor_right = 0.5
+anchor_bottom = 0.344
+offset_right = -576.0
+offset_bottom = -222.912
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 17.0
+offset_right = 82.0
+offset_bottom = 45.0
+text = "TIMER"

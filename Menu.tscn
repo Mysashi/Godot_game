@@ -1,0 +1,43 @@
+[gd_scene load_steps=4 format=3 uid="uid://dakaxnsd7t1ok"]
+
+[ext_resource type="Texture2D" uid="uid://df7chw8u7i1mo" path="res://menuanimated.png" id="1_k0x1f"]
+[ext_resource type="Script" path="res://Menu.gd" id="1_ym3hy"]
+[ext_resource type="Texture2D" uid="uid://tsst5861finw" path="res://play.png" id="2_pd6ic"]
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+scale = Vector2(1.00209, 1.0057)
+script = ExtResource("1_ym3hy")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(0.450398, 0.447691)
+texture = ExtResource("1_k0x1f")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TextureRect"]
+layout_direction = 2
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -280.0
+offset_top = 180.0
+offset_right = -230.0
+offset_bottom = 220.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.88303, 2.8416)
+
+[node name="Button" type="Button" parent="TextureRect/VBoxContainer"]
+layout_direction = 2
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+icon = ExtResource("2_pd6ic")
+
+[connection signal="pressed" from="TextureRect/VBoxContainer/Button" to="." method="_on_button_pressed"]

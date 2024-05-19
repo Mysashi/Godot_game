@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://d0vtm8dst44qo"]
+
+[ext_resource type="VideoStream" path="res://deadscreen.ogv" id="1_cf11x"]
+[ext_resource type="Script" path="res://end_screen.gd" id="2_skekb"]
+
+[node name="EndScreen" type="VideoStreamPlayer"]
+scale = Vector2(0.45091, 0.461041)
+stream = ExtResource("1_cf11x")
+volume_db = -4.15
+autoplay = true
+script = ExtResource("2_skekb")
+
+[connection signal="finished" from="." to="." method="_on_finished"]

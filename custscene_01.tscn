@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://b0yathb2tyfoo"]
+
+[ext_resource type="Texture2D" uid="uid://rgxgcv32iy7k" path="res://intro.png" id="1_dp5hd"]
+[ext_resource type="Script" path="res://custscene_01.gd" id="1_n5ccn"]
+
+[node name="Custscene01" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_n5ccn")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(0.451178, 0.440184)
+texture = ExtResource("1_dp5hd")
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]

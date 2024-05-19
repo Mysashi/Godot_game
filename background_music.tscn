@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dfv21jbmx4e6q"]
+
+[ext_resource type="AudioStream" uid="uid://cdfjyo31bnfq1" path="res://Sounds/ambient_cof.mp3" id="1_xmsog"]
+
+[node name="BackgroundMusic" type="AudioStreamPlayer2D"]
+stream = ExtResource("1_xmsog")
+volume_db = -19.676
+autoplay = true

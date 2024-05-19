@@ -1,38 +1,61 @@
-[gd_scene load_steps=5 format=3 uid="uid://ye80q8aobymu"]
+[gd_scene load_steps=9 format=3 uid="uid://ye80q8aobymu"]
 
-[ext_resource type="Texture2D" uid="uid://cj1pjysg603o3" path="res://radar10.png" id="2_o1xb8"]
+[ext_resource type="Texture2D" uid="uid://kjj7kxopu4gi" path="res://Sounds/d18642eec9ec7641.png" id="3_7fxvv"]
 [ext_resource type="Script" path="res://Movement.gd" id="3_gltbm"]
-[ext_resource type="Texture2D" uid="uid://b8eltoy4tlbxf" path="res://279581d763a22598.png" id="3_jioat"]
+[ext_resource type="PackedScene" uid="uid://ctuaxvthtutru" path="res://radar.tscn" id="3_lxbmh"]
+[ext_resource type="AudioStream" uid="uid://cjjx087qo7t" path="res://Sounds/footsteps3random.mp3" id="4_nkvve"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_etgl5"]
+size = Vector2(47, 41)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_incwp"]
+
+[sub_resource type="Environment" id="Environment_0h7or"]
+background_mode = 3
+glow_enabled = true
+glow_intensity = 0.26
+glow_strength = 0.91
+glow_hdr_threshold = 1.51
+glow_hdr_luminance_cap = 25.47
+glow_map_strength = 0.7
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r2esl"]
-size = Vector2(46.5, 42)
+size = Vector2(46, 42)
 
-[node name="Player" type="Node2D"]
+[node name="Player" type="CharacterBody2D"]
 position = Vector2(-216, 214)
-
-[node name="player" type="CharacterBody2D" parent="."]
-collision_layer = 2
-collision_mask = 3
 script = ExtResource("3_gltbm")
 
-[node name="Camera2D" type="Camera2D" parent="player"]
-position = Vector2(-2.37402, -3.01707)
-scale = Vector2(0.21582, 0.224121)
+[node name="agro-activator" type="Area2D" parent="."]
+position = Vector2(2, 0)
+collision_layer = 2
+collision_mask = 4
 
-[node name="Sprite2D" type="Sprite2D" parent="player"]
-position = Vector2(17.75, -16)
+[node name="activator" type="CollisionShape2D" parent="agro-activator"]
+position = Vector2(13, -10)
+shape = SubResource("RectangleShape2D_etgl5")
+
+[node name="Radar" parent="." instance=ExtResource("3_lxbmh")]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(2.163, 0.074, 0.046, 0.984)
+self_modulate = Color(3.244, 17.298, 29.729, 1)
+z_index = 1
+material = SubResource("ShaderMaterial_incwp")
+position = Vector2(16, -10)
 scale = Vector2(1.45312, 1.3125)
-texture = ExtResource("3_jioat")
+texture = ExtResource("3_7fxvv")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="player"]
-position = Vector2(17.75, -16)
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Sprite2D"]
+environment = SubResource("Environment_0h7or")
+
+[node name="Camera2D" type="Camera2D" parent="Sprite2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(15, -10)
 shape = SubResource("RectangleShape2D_r2esl")
 
-[node name="TextureRect" type="TextureRect" parent="player"]
-texture_filter = 1
-offset_left = -1134.0
-offset_top = -651.0
-offset_right = 3323.0
-offset_bottom = 1974.0
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("2_o1xb8")
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_nkvve")
+
+[connection signal="body_entered" from="agro-activator" to="." method="_on_agroactivator_body_entered"]

@@ -1,0 +1,99 @@
+[gd_scene load_steps=13 format=3 uid="uid://cggk3moqjnq8s"]
+
+[ext_resource type="Script" path="res://enemy_test.gd" id="1_iv2lq"]
+[ext_resource type="Texture2D" uid="uid://xtok2a6ea0bi" path="res://faza1.png" id="2_bx5ig"]
+[ext_resource type="AudioStream" uid="uid://ccnxlx5c5ixl7" path="res://Sounds/groanlong3.mp3" id="3_p0qfc"]
+[ext_resource type="AudioStream" uid="uid://bmmi886mhv544" path="res://Sounds/heart4.mp3" id="4_64ffh"]
+[ext_resource type="PackedScene" uid="uid://dq7bs105hl5gr" path="res://wander.tscn" id="5_gcjx2"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ad21q"]
+atlas = ExtResource("2_bx5ig")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5a88u"]
+atlas = ExtResource("2_bx5ig")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ewt5d"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ad21q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5a88u")
+}],
+"loop": true,
+"name": &"default",
+"speed": 1.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5br7e"]
+radius = 522.105
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bi0ii"]
+radius = 1270.09
+
+[sub_resource type="Environment" id="Environment_e6jar"]
+background_mode = 3
+glow_enabled = true
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vjq2v"]
+radius = 18.0
+height = 36.0
+
+[node name="Enemy_test" type="CharacterBody2D" node_paths=PackedStringArray("wander_direction")]
+collision_layer = 4
+collision_mask = 7
+script = ExtResource("1_iv2lq")
+wander_direction = NodePath("Wander")
+
+[node name="Wander" parent="." instance=ExtResource("5_gcjx2")]
+
+[node name="Animated" type="AnimatedSprite2D" parent="."]
+self_modulate = Color(16.216, 0.075, 0, 1)
+texture_filter = 1
+position = Vector2(0, -1)
+scale = Vector2(0.5, 0.527)
+sprite_frames = SubResource("SpriteFrames_ewt5d")
+autoplay = "default"
+
+[node name="detection_area" type="Area2D" parent="Animated"]
+collision_layer = 4
+collision_mask = 7
+
+[node name="near" type="CollisionShape2D" parent="Animated/detection_area"]
+shape = SubResource("CircleShape2D_5br7e")
+
+[node name="neargroan" type="AudioStreamPlayer2D" parent="Animated/detection_area"]
+stream = ExtResource("3_p0qfc")
+
+[node name="sound_area" type="Area2D" parent="Animated"]
+
+[node name="sound_shape" type="CollisionShape2D" parent="Animated/sound_area"]
+position = Vector2(3.36841, 0)
+shape = SubResource("CircleShape2D_bi0ii")
+
+[node name="heart" type="AudioStreamPlayer2D" parent="Animated/sound_area"]
+stream = ExtResource("4_64ffh")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Animated"]
+environment = SubResource("Environment_e6jar")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -1)
+shape = SubResource("CapsuleShape2D_vjq2v")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.1
+autostart = true
+
+[connection signal="area_entered" from="Animated/detection_area" to="." method="_on_detection_area_area_entered"]
+[connection signal="area_exited" from="Animated/detection_area" to="." method="_on_detection_area_area_exited"]
+[connection signal="body_entered" from="Animated/detection_area" to="." method="_on_detection_area_body_entered"]
+[connection signal="body_exited" from="Animated/detection_area" to="." method="_on_detection_area_body_exited"]
+[connection signal="body_entered" from="Animated/sound_area" to="." method="_on_sound_area_body_entered"]
+[connection signal="body_exited" from="Animated/sound_area" to="." method="_on_sound_area_body_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

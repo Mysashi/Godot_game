@@ -1,0 +1,47 @@
+[gd_scene load_steps=7 format=3 uid="uid://b2pccyo50nihg"]
+
+[ext_resource type="Texture2D" uid="uid://cj1pjysg603o3" path="res://radar10.png" id="1_fo4yu"]
+[ext_resource type="Shader" path="res://Shaders/radar_manual.gdshader" id="2_r7je3"]
+[ext_resource type="Texture2D" uid="uid://dv7qrka0is1k7" path="res://stenka.png" id="4_0sw7p"]
+[ext_resource type="Script" path="res://Shaders/Radar.gd" id="4_cccac"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xkcmw"]
+shader = ExtResource("2_r7je3")
+shader_parameter/radar_angle = 0.0
+shader_parameter/line_color = Color(1, 0.188609, 0.169776, 0.85098)
+shader_parameter/trail_color = Color(0.790899, 1.10701e-06, 0.403343, 0.2)
+shader_parameter/trail_length = 0.1
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jiijj"]
+size = Vector2(45.1633, 1.01053)
+
+[node name="Radar Panel (Manual)" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_top = -3.0
+offset_right = 240.0
+offset_bottom = 240.0
+
+[node name="Radar Backing" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_fo4yu")
+expand_mode = 1
+
+[node name="Radar" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_xkcmw")
+position = Vector2(8.53323, 118.439)
+scale = Vector2(-7.41126, 2.90246)
+texture = ExtResource("4_0sw7p")
+script = ExtResource("4_cccac")
+
+[node name="Area2D" type="Area2D" parent="Radar"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Radar/Area2D"]
+position = Vector2(6.23036, 0.168427)
+shape = SubResource("RectangleShape2D_jiijj")

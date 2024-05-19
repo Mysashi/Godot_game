@@ -1,0 +1,60 @@
+[gd_scene load_steps=8 format=3 uid="uid://blq3royw7evo6"]
+
+[ext_resource type="Texture2D" uid="uid://bdtbewdome1yn" path="res://eyes.png" id="1_5b1cb"]
+[ext_resource type="Script" path="res://outro.gd" id="1_ljpbb"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rvk8h"]
+atlas = ExtResource("1_5b1cb")
+region = Rect2(0, 0, 512, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_auccm"]
+atlas = ExtResource("1_5b1cb")
+region = Rect2(512, 0, 512, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sr4hj"]
+atlas = ExtResource("1_5b1cb")
+region = Rect2(1024, 0, 512, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nst4e"]
+atlas = ExtResource("1_5b1cb")
+region = Rect2(1536, 0, 512, 256)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5562b"]
+animations = [{
+"frames": [{
+"duration": 5.0,
+"texture": SubResource("AtlasTexture_rvk8h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_auccm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sr4hj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nst4e")
+}],
+"loop": true,
+"name": &"default",
+"speed": 1.0
+}]
+
+[node name="Outro" type="Control"]
+layout_mode = 3
+anchor_right = 0.663
+anchor_bottom = 0.537
+offset_right = -23.7761
+offset_bottom = -4.97601
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ljpbb")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(575, 322)
+scale = Vector2(2.25, 2.55469)
+sprite_frames = SubResource("SpriteFrames_5562b")
+autoplay = "default"
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="frame_changed" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_frame_changed"]

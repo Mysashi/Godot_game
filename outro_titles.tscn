@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://i1122cmnejxe"]
+
+[ext_resource type="Script" path="res://outro_titles.gd" id="1_glq7y"]
+[ext_resource type="Texture2D" uid="uid://c4o1t8f4b38pa" path="res://cutscene2.png" id="1_w3oyc"]
+[ext_resource type="AudioStream" uid="uid://c3f701awjpm7o" path="res://PromiseEnding.mp3" id="2_dgkpr"]
+
+[node name="Outro_titles" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1420.0
+offset_bottom = 808.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_glq7y")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 5750.0
+offset_bottom = 3285.0
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_w3oyc")
+
+[node name="SILENT_HILL" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_dgkpr")

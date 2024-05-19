@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://dakaxnsd7t1ok"]
+
+[ext_resource type="Texture2D" uid="uid://df7chw8u7i1mo" path="res://menuanimated.png" id="1_k0x1f"]
+[ext_resource type="Script" path="res://Menu.gd" id="1_ym3hy"]
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.37006, 1.20662)
+script = ExtResource("1_ym3hy")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(0.450398, 0.447691)
+texture = ExtResource("1_k0x1f")
